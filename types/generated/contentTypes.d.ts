@@ -803,12 +803,18 @@ export interface ApiArticleArticle extends Schema.CollectionType {
     title: Attribute.String;
     subtitle: Attribute.String;
     author: Attribute.String;
-    content: Attribute.Blocks;
     tags: Attribute.Relation<
       'api::article.article',
       'manyToMany',
       'api::tag.tag'
     >;
+    ck_content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'toolbarBalloon';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
