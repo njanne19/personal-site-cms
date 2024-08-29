@@ -1,0 +1,25 @@
+services: 
+  strapi-dev:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports: 
+      - "1337:1337"
+    network_mode: host
+    volumes: 
+      - .:/opt/app
+      - /opt/app/node_modules
+    env_file: 
+      - .env
+    command: yarn develop --debug
+
+  strapi-prod: 
+    build: 
+      context: . 
+      dockerfile: Dockerfile.prod
+    ports: 
+      - "1337:1337"
+    network_mode: host
+    env_file:
+      - .env
+    command: yarn start
